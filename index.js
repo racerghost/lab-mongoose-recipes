@@ -20,7 +20,7 @@ mongoose
     // Before adding any recipes to the database, let's remove all existing ones
     return Recipe.deleteMany()
   })
-  .then(() => {
+  .then(() => {     //Iteration 3 - Insert multiple recipes
     // Run your code here, after you have insured that the connection was made
     
     // data.forEach(element => {
@@ -41,24 +41,18 @@ mongoose
         console.log('Error finding for recipes');
       });
   })
-  .then(()=>{
+  .then(()=>{       //Iteration 4 - Update recipe
     let filter={title:"Rigatoni alla Genovese"};
     let update={duration:100};
     return Recipe.findOneAndUpdate (filter,update)
       
   })
-  .then(()=>{
-    let filter={title:"Rigatoni alla Genovese"};
-    let update={duration:100};
-    return Recipe.findOneAndUpdate (filter,update)
-      
-  })
-  .then(()=>{
+  .then(()=>{       //Iteration 5 - Remove a recipe
     filter={title:"Carrot Cake"};
     return Recipe.deleteOne (filter);
     
   })
-  .then(()=>{
+  .then(()=>{       //Iteration 6 - Close the Database
         // console.log(mongoose.connection.readyState); 
       mongoose.connection.close()
       .then(() => {
