@@ -27,17 +27,46 @@ mongoose
     //   console.log ("Showed title before inserting: ",element.title);
     //   Recipe.create (element);
     // });
-    Recipe.insertMany(data)
+    return Recipe.insertMany(data)
 
   })
   .then(()=>{
-    Recipe.find({})
-      .then(oneRecipe => {
-        console.log(oneRecipe);
+    return Recipe.find({})
+      .then(allRecipes => {
+        (allRecipes.forEach(recipe=>{
+          return (console.log('Platos: ',recipe.title));
+        }));
       })
       .catch(error => {
         console.log('Error finding for recipes');
       });
+  })
+  .then(()=>{
+    let filter={title:"Rigatoni alla Genovese"};
+    let update={duration:100};
+    return Recipe.findOneAndUpdate (filter,update)
+      
+  })
+  .then(()=>{
+    let filter={title:"Rigatoni alla Genovese"};
+    let update={duration:100};
+    return Recipe.findOneAndUpdate (filter,update)
+      
+  })
+  .then(()=>{
+    filter={title:"Carrot Cake"};
+    return Recipe.deleteOne (filter);
+    
+  })
+  .then(()=>{
+        // console.log(mongoose.connection.readyState); 
+      mongoose.connection.close()
+      .then(() => {
+        console.log('disconnected!');
+      })
+      .catch(() => {
+        console.log('error disconnected');
+      })
   })
   .catch(error => {
     console.error('Error connecting to the database', error);
